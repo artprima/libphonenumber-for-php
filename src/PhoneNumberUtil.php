@@ -1125,11 +1125,6 @@ class PhoneNumberUtil
     public function format(PhoneNumber $number, $numberFormat)
     {
         if ($number->getNationalNumber() == 0 && $number->hasRawInput()) {
-            // Unparseable numbers that kept their raw input just use that.
-            // This is the only case where a number can be formatted as E164 without a
-            // leading '+' symbol (but the original number wasn't parseable anyway).
-            // TODO: Consider removing the 'if' above so that unparseable
-            // strings without raw input format to the empty string instead of "+00"
             $rawInput = $number->getRawInput();
             if (mb_strlen($rawInput) > 0) {
                 return $rawInput;
@@ -1141,11 +1136,7 @@ class PhoneNumberUtil
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 
         if ($numberFormat == PhoneNumberFormat::E164) {
-            // Early exit for E164 case (even if the country calling code is invalid) since no formatting
-            // of the national number needs to be applied. Extensions are not formatted.
             $formattedNumber .= $nationalSignificantNumber;
-            $this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
-            return $formattedNumber;
         }
 
         if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
@@ -1160,9 +1151,12 @@ class PhoneNumberUtil
         // Metadata cannot be null because the country calling code is valid (which means that the
         // region code cannot be ZZ and must be one of our supported region codes).
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
-        $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+        if ($numberFormat !== PhoneNumberFormat::E164) {
+            $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+        }
         $this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
         $this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+
         return $formattedNumber;
     }
 
