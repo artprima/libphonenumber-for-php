@@ -191,7 +191,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(1)(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '045 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -203,7 +203,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(1)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '045 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -254,27 +254,21 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(1)(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
         0 => '1(?:33|55|81)',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     4 => 
     array (
-      'pattern' => '(1)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
         0 => '1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
   ),
   'mainCountryForCode' => false,

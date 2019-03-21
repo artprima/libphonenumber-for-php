@@ -54,4 +54,7 @@ return array (
   59069088 => 'Dauphin Telecom',
   59069089 => 'SFR/Rife',
   5906909 => 'SFR/Rife',
+  59069122 => 'Dauphin Telecom',
+  59069129 => 'Digicel',
+  5906913 => 'Arcane',
 );

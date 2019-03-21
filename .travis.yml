@@ -5,32 +5,38 @@ language: php
 matrix:
     fast_finish: true
     include:
+        # Need to use Precise for PHP 5.3
         - php: 5.3
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE_FLAGS=""
+          dist: precise
         - php: 5.4
+          env: COVERAGE_FLAGS=""
         - php: 5.5
+          env: COVERAGE_FLAGS=""
         - php: 5.6
+          env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: 7.0
+          env: COVERAGE_FLAGS=""
         - php: 7.1
-        # Use the newer stack for HHVM as HHVM does not support Precise
-        - php: hhvm
-          sudo: required
-          dist: trusty
-          group: edge
+          env: COVERAGE_FLAGS=""
+        - php: 7.2
+          env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
+        - php: 7.3
+          env: COVERAGE_FLAGS=""
 
 before_install:
- - wget https://scrutinizer-ci.com/ocular.phar
+ - travis_retry wget https://scrutinizer-ci.com/ocular.phar
  - mkdir -p build/logs
 
 install:
  - travis_retry composer update --no-interaction $COMPOSER_FLAGS
 
 script:
-  - ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+  - composer validate --strict
+  - ./vendor/bin/phpunit $COVERAGE_FLAGS
 
-after_script:
-  - php vendor/bin/coveralls -v --exclude-no-stmt
-  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+after_success:
+  - "[[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls"
+  - travis_retry php $COVERALLS_PATH -v --exclude-no-stmt
+  - travis_retry php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 
-notifications:
-  irc: "irc.appliedirc.com#applied"

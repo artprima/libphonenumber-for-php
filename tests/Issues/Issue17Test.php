@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class Issue17Test extends \PHPUnit_Framework_TestCase
+class Issue17Test extends TestCase
 {
     /**
      * @var PhoneNumberOfflineGeocoder
@@ -27,10 +28,10 @@ class Issue17Test extends \PHPUnit_Framework_TestCase
 
     public function testIsleOfManLocale()
     {
-        $number = "447624206000";
+        $number = '447624206000';
 
         $phoneNumber = $this->phoneUtil->parse($number, 'GB');
 
-        $this->assertEquals("Isle of Man", $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        $this->assertEquals('Isle of Man', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }

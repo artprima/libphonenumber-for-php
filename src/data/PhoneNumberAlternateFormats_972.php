@@ -20,13 +20,13 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([2-489])(\\d{3})(\\d{2})(\\d{2})',
-      'format' => '$1-$2-$3-$4',
+      'pattern' => '(\\d)(\\d{3})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
         0 => '[2-489]',
       ),
-      'nationalPrefixFormattingRule' => '$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),

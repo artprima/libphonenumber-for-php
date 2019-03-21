@@ -1,7 +1,5 @@
 # PhoneNumberOfflineGeocoder
 
-The Phone Number Geocoder requires the PHP [intl](http://php.net/intl) extension.
-
 ## Getting Started
 
 As with [PhoneNumberUtil](PhoneNumberUtil.md), the Phone Number Geocoder uses a singleton.
@@ -46,7 +44,7 @@ var_dump($geoCoder->getDescriptionForNumber($usNumber, 'en_GB', 'US'));
 // string(14) "Mountain View, CA"
 
 var_dump($geoCoder->getDescriptionForNumber($usNumber, 'ko-KR', 'US'));
-// string(6) "영국" (Korean for United States)
+// string(6) "미국" (Korean for United States)
 ```
 
 ## `getDescriptionForValidNumber()`

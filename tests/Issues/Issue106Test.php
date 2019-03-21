@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumber;
+use PHPUnit\Framework\TestCase;
 
-class Issue106Test extends \PHPUnit_Framework_TestCase
+class Issue106Test extends TestCase
 {
     private static $TW_Number1;
     /**
@@ -27,16 +28,16 @@ class Issue106Test extends \PHPUnit_Framework_TestCase
 
     public function testGeocoderForZh()
     {
-        $this->assertEquals("Taipei", $this->geocoder->getDescriptionForNumber(self::$TW_Number1, "en"));
+        $this->assertEquals('Taipei', $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'en'));
 
         $this->assertEquals(
             pack('H*', 'e58fb0') . pack('H*', 'e58c97'),
-            $this->geocoder->getDescriptionForNumber(self::$TW_Number1, "zh_CN")
+            $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'zh_CN')
         );
 
         $this->assertEquals(
             pack('H*', 'e887ba') . pack('H*', 'e58c97'),
-            $this->geocoder->getDescriptionForNumber(self::$TW_Number1, "zh_TW")
+            $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'zh_TW')
         );
     }
 }

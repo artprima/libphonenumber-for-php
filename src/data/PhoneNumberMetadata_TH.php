@@ -14,13 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-9]\\d{7,8}|1\\d{3}(?:\\d{5,6})?',
+    'NationalNumberPattern' => '1\\d{8,9}|(?:[2-57]|[689]\\d)\\d{7}',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 8,
-      2 => 9,
-      3 => 10,
+      0 => 8,
+      1 => 9,
+      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -118,11 +117,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '1\\d{3}',
-    'ExampleNumber' => '1100',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -140,11 +137,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '1\\d{3}',
-    'ExampleNumber' => '1100',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -152,7 +147,7 @@ return array (
   ),
   'id' => 'TH',
   'countryCode' => 66,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '00[1-9]',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -160,7 +155,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(2)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -172,7 +167,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([13-9]\\d)(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -184,13 +179,13 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(1[89]00)(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),

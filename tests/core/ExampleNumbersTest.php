@@ -8,6 +8,7 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Verifies all of the example numbers in the metadata are valid and of the correct type. If no
@@ -15,7 +16,7 @@ use libphonenumber\ShortNumberInfo;
  * relevant for all regions. Tests that check the XML schema will ensure that an exampleNumber
  * node is present for every phone number description.
  */
-class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
+class ExampleNumbersTest extends TestCase
 {
 
     /**
@@ -237,9 +238,9 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
     public function testGlobalNetworkNumbers($callingCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForNonGeoEntity($callingCode);
-        $this->assertNotNull($exampleNumber, "No example phone number for calling code " . $callingCode);
+        $this->assertNotNull($exampleNumber, 'No example phone number for calling code ' . $callingCode);
         if (!$this->phoneNumberUtil->isValidNumber($exampleNumber)) {
-            $this->fail("Failed validation for " . $exampleNumber);
+            $this->fail('Failed validation for ' . $exampleNumber);
         }
     }
 
@@ -250,7 +251,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
     public function testEveryRegionHasAnExampleNumber($regionCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumber($regionCode);
-        $this->assertNotNull($exampleNumber, "No example number found for region " . $regionCode);
+        $this->assertNotNull($exampleNumber, 'No example number found for region ' . $regionCode);
 
         /*
          * Check the number is valid
@@ -303,7 +304,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         }
         $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
         if (!$this->shortNumberInfo->isValidShortNumber($phoneNumber)) {
-            $this->fail("Failed validation for " . (string)$phoneNumber);
+            $this->fail('Failed validation for ' . $phoneNumber);
         }
     }
 
@@ -339,7 +340,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
             $exampleShortNumberCost = $this->shortNumberInfo->getExpectedCostForRegion($phoneNumber, $regionCode);
 
-            $this->assertEquals($cost, $exampleShortNumberCost, 'Wrong cost for ' . (string)$phoneNumber);
+            $this->assertEquals($cost, $exampleShortNumberCost, 'Wrong cost for ' . $phoneNumber);
         }
     }
 
@@ -358,13 +359,13 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
                     $regionCode
                 ) || !$this->shortNumberInfo->isEmergencyNumber($exampleNumber, $regionCode)
             ) {
-                $this->fail("Emergency example number test failed for " . $regionCode);
+                $this->fail('Emergency example number test failed for ' . $regionCode);
             } elseif ($this->shortNumberInfo->getExpectedCostForRegion(
                     $phoneNumber,
                     $regionCode
                 ) !== ShortNumberCost::TOLL_FREE
             ) {
-                $this->fail("Emergency example number not toll free for " . $regionCode);
+                $this->fail('Emergency example number not toll free for ' . $regionCode);
             }
         }
     }
@@ -384,7 +385,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             if (!$this->shortNumberInfo->isPossibleShortNumberForRegion($carrierSpecificNumber, $regionCode)
                 || !$this->shortNumberInfo->isCarrierSpecificForRegion($carrierSpecificNumber, $regionCode)
             ) {
-                $this->fail("Carrier-specific test failed for " . $regionCode);
+                $this->fail('Carrier-specific test failed for ' . $regionCode);
             }
         }
     }

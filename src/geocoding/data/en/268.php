@@ -47,4 +47,8 @@ return array (
   2682528 => 'Malkerns, Manzini district',
   2682538 => 'Mankayane, Manzini district',
   2682548 => 'Ludzeludze, Manzini district',
+  26832 => 'Shiselweni',
+  26833 => 'Lubombo',
+  26834 => 'Hhohho',
+  26835 => 'Manzini',
 );

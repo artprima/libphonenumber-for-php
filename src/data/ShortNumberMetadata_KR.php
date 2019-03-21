@@ -14,11 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '1\\d{2,4}',
     'PossibleLength' => 
     array (
       0 => 3,
       1 => 4,
+      2 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -26,10 +27,12 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:1[78]|28|330|82)',
-    'ExampleNumber' => '118',
+    'NationalNumberPattern' => '1(?:1[27-9]|28|330|82)',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
+      0 => 3,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -59,8 +62,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0[01]|1[027-9]|2[01389]|3(?:2|3[039]|45|66|88|9[18])|82)',
-    'ExampleNumber' => '112',
+    'NationalNumberPattern' => '1(?:[016-9]114|3(?:2|3[039]|45|66|88|9[18]))|1(?:0[01]|1[0247-9]|2[01389]|82)',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
     ),
@@ -80,11 +83,12 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '10[01]',
+    'NationalNumberPattern' => '1[016-9]1\\d\\d|1(?:0[01]|14)',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
       0 => 3,
+      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (

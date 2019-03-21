@@ -4,6 +4,7 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\Tests\core\PhoneNumberUtilTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test calling public static methods without an instance of PhoneNumberUtil being created
@@ -11,7 +12,7 @@ use libphonenumber\Tests\core\PhoneNumberUtilTest;
  * @package libphonenumber\Tests\Issues
  * @see https://github.com/giggsey/libphonenumber-for-php/issues/135
  */
-class Issue135Test extends \PHPUnit_Framework_TestCase
+class Issue135Test extends TestCase
 {
     public function setUp()
     {
@@ -25,9 +26,9 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
      */
     public function testConvertAlphaCharactersInNumber()
     {
-        $input = "1800-ABC-DEF";
+        $input = '1800-ABC-DEF';
         // Alpha chars are converted to digits; everything else is left untouched.
-        $expectedOutput = "1800-222-333";
+        $expectedOutput = '1800-222-333';
         $this->assertEquals($expectedOutput, PhoneNumberUtil::convertAlphaCharactersInNumber($input));
     }
 
@@ -38,10 +39,10 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
     public function testGetCountryMobileToken()
     {
         // MX
-        $this->assertEquals("1", PhoneNumberUtil::getCountryMobileToken(52));
+        $this->assertEquals('1', PhoneNumberUtil::getCountryMobileToken(52));
 
         // Country calling code for Sweden, which has no mobile token.
-        $this->assertEquals("", PhoneNumberUtil::getCountryMobileToken(46));
+        $this->assertEquals('', PhoneNumberUtil::getCountryMobileToken(46));
     }
 
     /**
@@ -50,7 +51,7 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
      */
     public function testIsViablePhoneNumber()
     {
-        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('1'));
     }
 
     /**
@@ -59,7 +60,7 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
      */
     public function testExtractPossibleNumber()
     {
-        $this->assertEquals("0800-345-600", PhoneNumberUtil::extractPossibleNumber("Tel:0800-345-600"));
+        $this->assertEquals('0800-345-600', PhoneNumberUtil::extractPossibleNumber('Tel:0800-345-600'));
     }
 
     /**
@@ -68,12 +69,12 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
      */
     public function testNormaliseReplaceAlphaCharacters()
     {
-        $inputNumber = "034-I-am-HUNGRY";
-        $expectedOutput = "034426486479";
+        $inputNumber = '034-I-am-HUNGRY';
+        $expectedOutput = '034426486479';
         $this->assertEquals(
             $expectedOutput,
             PhoneNumberUtil::normalize($inputNumber),
-            "Conversion did not correctly replace alpha characters"
+            'Conversion did not correctly replace alpha characters'
         );
     }
 
@@ -83,9 +84,9 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
      */
     public function testNormalizeDiallableCharsOnly()
     {
-        $inputNumber = "03*4-56&+a#234";
-        $expectedOutput = "03*456+#234";
+        $inputNumber = '03*4-56&+a#234';
+        $expectedOutput = '03*456+#234';
         $this->assertEquals($expectedOutput, PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
-            "Conversion did not correctly remove non-diallable characters");
+            'Conversion did not correctly remove non-diallable characters');
     }
 }
